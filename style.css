@@ -1,0 +1,100 @@
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+body {
+    margin: 0;
+    background-color: #FFD736;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 8px 0px;
+}
+
+input, select {
+    padding: 8px;
+    outline: none !important;
+    border: 1px solid rgb(0, 0, 0);
+}
+
+input:invalid {
+    border: 1px solid red;
+}
+
+input:valid, select:valid {
+    border: 1px solid #46AA2B;
+}
+
+input:focus, select:focus {
+    box-shadow: 1px 1px 5px #98abbe;
+}
+
+.label-text {
+    display: flex;
+    align-items: center;
+}
+
+label {
+    display: block;
+    width: 100px;
+    text-align: center;
+}
+
+#zip-code, #house-number {
+    width: 100px;
+}
+
+#city, #streets {
+    box-sizing: content-box;
+    width: 340px;
+}
+
+@media (max-width: 750px) {
+    .form-row {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    #zip-code, #house-number, #city, #streets, #country {
+        width: 200px;
+    }
+
+    label {
+        display: block;
+        width: 100px;
+        text-align: left;
+    }
+}
+
+@media (max-width: 350px) {
+    label {
+        display: none;
+    }
+
+    form {
+        width: 90%;
+    }
+
+    .label-text {
+        width: 100%;
+    }
+
+    input, select {
+        width: 100% !important;
+    }
+}
