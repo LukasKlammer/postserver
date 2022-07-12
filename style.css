@@ -55,7 +55,7 @@ label {
     text-align: center;
 }
 
-#zip-code, #house-number {
+#zip, #house-number {
     width: 100px;
 }
 
@@ -70,7 +70,7 @@ label {
         gap: 16px;
     }
 
-    #zip-code, #house-number, #city, #streets, #country {
+    #zip, #house-number, #city, #streets, #country {
         width: 200px;
     }
 
