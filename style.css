@@ -59,7 +59,7 @@ label {
     width: 100px;
 }
 
-#city, #streets {
+#citys, #streets {
     box-sizing: content-box;
     width: 340px;
 }
@@ -74,7 +74,7 @@ label {
         gap: 16px;
     }
 
-    #zip, #house-number, #city, #streets, #country {
+    #zip, #house-number, #citys, #streets, #country {
         width: 200px;
     }
 
