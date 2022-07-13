@@ -7,7 +7,7 @@ async function handOverCitys() {
         const foundCityData = await loadCityData(zip);
         if (foundCityData['rows']) {
             findAllCitys(foundCityData);
-            setSelectOptions(citys, 'citys');
+            setSelectOptions(citys, 'city');
             await handOverStreets();
         } else {
             document.getElementById('not-found').classList.remove('d-none');
@@ -18,12 +18,11 @@ async function handOverCitys() {
 
 
 async function handOverStreets() {
-    const city = document.getElementById('citys').value;
+    const city = document.getElementById('city').value;
     const zip = document.getElementById('zip').value;
     const foundStreetData = await loadStreetData(zip, city);
     findAllStreets(foundStreetData);
-    setSelectOptions(streets, 'streets');
-    console.log('Streets Hand overed');
+    setSelectOptions(streets, 'street');
 }
 
 
@@ -62,14 +61,9 @@ function findAllStreets(foundStreetData) {
     const streetInfos = foundStreetData['rows'];
     for (let i = 0; i < streetInfos.length; i++) {
         const street = streetInfos[i]['street'];
-        // const district = streetInfos['i']['district'];
-        // console.log(district);
         if (!streets.includes(street)) {
             streets.push(street);
         }
-        // if (!streets.includes(district)) {
-        //     streets.push(district);
-        // }
     }
 }
 
@@ -103,25 +97,19 @@ async function loadStreetData(zip, city) {
 }
 
 
+function send() {
+    const zip = document.getElementById('zip').value;
+    const city = document.getElementById('city').value;
+    const street = document.getElementById('street').value;
+    const houseNumber = document.getElementById('house-number').value;
+    const country = document.getElementById('country').value;
 
-
-
-
-
-// Wenn es mit formData gemacht werden muss
-
-        // let formData = new FormData();
-        // formData.append('finda', 'city');
-        // formData.append('city', zip.value);
-        // formData.append('lang', 'de_DE')
-
-        // const url = `https://www.postdirekt.de/plzserver/PlzAjaxServlet?nocache=${timestamp}`;
-        // const fetchOptions = {
-        //     method: 'POST',
-        //     body: formData,
-        // };
-
-        // if (!response.ok) {
-        //     const errorMessage = await response.text();
-        //     throw new Error(errorMessage);
-        // }
+    alert(` {
+        zip: ${zip},
+        city: ${city},
+        street: ${street},
+        house-number: ${houseNumber},
+        country: ${country},
+    }
+    `);
+}

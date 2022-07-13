@@ -19,7 +19,7 @@
 
 <body>
     <h1>Postserver</h1>
-    <form class="adress-form" onsubmit="getJson()">
+    <form class="adress-form" onsubmit="send()">
         <h2>Adresse</h2>
         <div class="form-row">
             <div class="label-text">
@@ -28,15 +28,15 @@
             </div>
             <div class="label-text">
                 <label for="city">Stadt</label>
-                <select id="citys" name="citys" onchange="handOverStreets()">
+                <select id="city" name="city" onchange="handOverStreets()">
                     <!-- options added by JavaScript -->
                 </select>
             </div>
         </div>
         <div class="form-row">
             <div class="label-text">
-                <label for="streets">Straße</label>
-                <select id="streets" name="streets">
+                <label for="street">Straße</label>
+                <select id="street" name="street">
                     <!-- options added by JavaScript -->
                 </select>
             </div>
