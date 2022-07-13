@@ -24,7 +24,7 @@
         <div class="form-row">
             <div class="label-text">
                 <label for="zip-code">PLZ</label>
-                <input type="number" id="zip" placeholder="Postleitzahl" required min="10000" max="99999" onkeyup="checkZip()">
+                <input type="number" id="zip" placeholder="Postleitzahl" required min="10000" max="99999" onkeyup="handOverCityName()">
             </div>
             <div class="label-text">
                 <label for="city">Stadt</label>
@@ -54,6 +54,7 @@
         </div>
         <button>info</button>
     </form>
+    <h3 id="not-found" class="d-none"></h3>
 
 
 </body>

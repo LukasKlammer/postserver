@@ -64,6 +64,10 @@ label {
     width: 340px;
 }
 
+.d-none {
+    display: none;
+}
+
 @media (max-width: 750px) {
     .form-row {
         flex-direction: column;
