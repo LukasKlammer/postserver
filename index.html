@@ -24,11 +24,11 @@
         <div class="form-row">
             <div class="label-text">
                 <label for="zip-code">PLZ</label>
-                <input type="number" id="zip" placeholder="Postleitzahl" required min="10000" max="99999" onkeyup="handOverCityAndStreets()">
+                <input type="number" id="zip" placeholder="Postleitzahl" required min="10000" max="99999" onkeyup="handOverCitys()">
             </div>
             <div class="label-text">
                 <label for="city">Stadt</label>
-                <select id="citys" name="citys">
+                <select id="citys" name="citys" onchange="handOverStreets()">
                     <!-- options added by JavaScript -->
                 </select>
             </div>
@@ -37,10 +37,7 @@
             <div class="label-text">
                 <label for="streets">Straße</label>
                 <select id="streets" name="streets">
-                    <option value="musterstrasse">Musterstrasse</option>
-                    <option value="schnellstrasse">Schnellstrasse</option>
-                    <option value="danteweg">Danteweg</option>
-                    <option value="mitterweg">Mitterweg</option>
+                    <!-- options added by JavaScript -->
                 </select>
             </div>
             <div class="label-text">

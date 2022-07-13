@@ -1,19 +1,29 @@
 let citys = [];
-let streets = ['Teststraße', 'Müllergasse'];
+let streets = [];
 
-async function handOverCityAndStreets() {
+async function handOverCitys() {
     const zip = document.getElementById('zip').value;
     if (zip.length == 5) {
-        const foundCityData = await loadByZip(zip);
-        findAllCitys(foundCityData);
-        setCitySelectInput(zip);
+        const foundCityData = await loadCityData(zip);
         if (foundCityData['rows']) {
-            const city = foundCityData['rows'][0]['city'];
-            // const foundStreetData = await loadByZipAndCity(zip, city);
-            // console.log(foundStreetData);
+            findAllCitys(foundCityData);
+            setSelectOptions(citys, 'citys');
+            await handOverStreets();
+        } else {
+            document.getElementById('not-found').classList.remove('d-none');
+            document.getElementById('not-found').innerHTML = `0 Suchtreffer für "${zip}"`;
         }
-
     }
+}
+
+
+async function handOverStreets() {
+    const city = document.getElementById('citys').value;
+    const zip = document.getElementById('zip').value;
+    const foundStreetData = await loadStreetData(zip, city);
+    findAllStreets(foundStreetData);
+    setSelectOptions(streets, 'streets');
+    console.log('Streets Hand overed');
 }
 
 
@@ -23,7 +33,7 @@ async function handOverCityAndStreets() {
  * @param {number} zip 
  * @returns {json} all informations that we get from server
  */
-async function loadByZip(zip) {
+async function loadCityData(zip) {
     try {
         const url = `https://cors-anywhere.herokuapp.com/https://www.postdirekt.de/plzserver/PlzAjaxServlet?finda=city&city=${zip}&lang=de_DE`;
         const response = await fetch(url);
@@ -38,36 +48,49 @@ async function loadByZip(zip) {
 function findAllCitys(foundCityData) {
     citys = [];
     const cityInfos = foundCityData['rows'];
-    if (cityInfos) {
-        for (let i = 0; i < cityInfos.length; i++) {
-            const city = cityInfos[i]['city'];
-            if (!citys.includes(city)) {
-                citys.push(city);
-            }
+    for (let i = 0; i < cityInfos.length; i++) {
+        const city = cityInfos[i]['city'];
+        if (!citys.includes(city)) {
+            citys.push(city);
         }
     }
 }
 
 
-function setCitySelectInput(zip) { // Hinweis: Kann auch mehrere Ortsteile geben, z. B. 91126 hat 3 Ortsteile
-    if (citys.length >= 0) {
+function findAllStreets(foundStreetData) {
+    streets = [];
+    const streetInfos = foundStreetData['rows'];
+    for (let i = 0; i < streetInfos.length; i++) {
+        const street = streetInfos[i]['street'];
+        // const district = streetInfos['i']['district'];
+        // console.log(district);
+        if (!streets.includes(street)) {
+            streets.push(street);
+        }
+        // if (!streets.includes(district)) {
+        //     streets.push(district);
+        // }
+    }
+}
+
+
+function setSelectOptions(array, inputId) {
+    if (array.length >= 0) {
         document.getElementById('not-found').classList.add('d-none');
-        let selectInput = document.getElementById('citys');
+        let selectInput = document.getElementById(inputId);
         selectInput.innerHTML = '';
-        for (let i = 0; i < citys.length; i++) {
-            const city = citys[i];
+        for (let i = 0; i < array.length; i++) {
+            const elementName = array[i];
             opt = document.createElement("option");
-            opt.value = city;
-            opt.textContent = city;
+            opt.value = elementName;
+            opt.textContent = elementName;
             selectInput.appendChild(opt);
         }
-    } else {
-        document.getElementById('not-found').classList.remove('d-none');
-        document.getElementById('not-found').innerHTML = `0 Suchtreffer für "${zip}"`;
     }
 }
 
-async function loadByZipAndCity(zip, city) {
+
+async function loadStreetData(zip, city) {
     let district = '';
     try {
         const url = `https://cors-anywhere.herokuapp.com/https://www.postdirekt.de/plzserver/PlzAjaxServlet?finda=streets&plz_plz=${zip}&plz_city=${city}&plz_district=${district}=&lang=de_DE`;
@@ -79,10 +102,6 @@ async function loadByZipAndCity(zip, city) {
     }
 }
 
-
-function setStreetsInput() {
-
-}
 
 
 
